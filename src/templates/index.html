@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Skill Verification System</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+        <link rel="stylesheet" href="{{url_for('static',filename='login/style.css')}}"/>
+        <script src="{{url_for('static',filename='login/script.js')}}"></script>
+     </head>
+    <body>
+        <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="wrapper">
+                  <div class="form" id="form1">
+                    <div class="title">Login</div>
+                    <form action="/loginForm" method="post" class="loginForm">
+                      <br/><br/>
+                      <div class="profileImage">
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                      </div>
+                      <div class="form-group">
+                        <i class="fa fa-envelope form-icon"></i>
+                        <input type="text" class="form-control" id="walletaddr" name="walletaddr" placeholder="Enter your wallet address" required="">
+                      </div>
+                      <div class="form-group">
+                        <i class="fa fa-lock form-icon"></i>
+                        <input type="password" class="form-control" id="pwd" name="password" placeholder="Password">
+                      </div>
+                      <button type="submit" class="btn btn-default">login</button>
+                    </form>
+                    <span style="color:red">{{err1}}</span>
+                    <span style="color:green">{{res1}}</span>
+                  </div>
+                  <div class="form form-horizontal" id="form2">
+                    <div class="title">Sign Up</div>
+                    <form action="/registerForm" method="post" class="signupForm">
+                      <div class="form-group">
+                        <i class="fa form-icon"></i>
+                        <input type="text" class="form-control" id="walletaddr" name="walletaddr" placeholder="Enter Wallet address" required="">
+                      </div>
+                      <div class="form-group">
+                        <i class="fa form-icon"></i>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name " required="">
+                      </div>
+                      <div class="form-group">
+                        <i class="fa fa-envelope form-icon"></i>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email" required="">
+                      </div>
+                      <div class="form-group">
+                        <i class="fa fa-envelope form-icon"></i>
+                        <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Enter Your Mobile" required="">
+                      </div>
+                      <div class="form-group">
+                        <i class="fa fa-lock form-icon"></i>
+                        <input type="password" class="form-control" id="pwd" name="password" placeholder="Password" required="">
+                      </div>
+                      <div class="form-group">
+                        <label for="sel1" style="color:white">Select Role:</label>
+                        <select class="form-control" id="role" name='role' required="">
+                            <option value="0">Instructor</option>
+                            <option value="1">Evaluator</option>
+                            <option value="2">Candidate</option>
+                            <option value="3">Recruiter</option>
+                        </select>
+                    </div>
+                      <button type="submit" class="btn btn-default">Sign up</button>
+                    </form>
+                    <span style="color:red">{{err}}</span>
+                    <span style="color:green">{{res}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>    
+    </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Candidate Dashboard | Skill Verification System</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css"/>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="{{url_for('static',filename='dashboard/style.css')}}" />
+        <script src="{{url_for('static',filename='dashboard/script.js')}}"></script>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-custom navbar-mainbg">
+            <a class="navbar-brand navbar-logo" href="#">Skill Verification System</a>
+            <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars text-white"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/candidatedashboard"><i class="far fa-address-book"></i>My Exams</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/myresults"><i class="far fa-clone"></i>My Results</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout"><i class="far fa-copy"></i>Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <br/><br/>
+        <div class="container">
+            <h1>My Exams</h1>
+                <table class="table">
+                    <tr>
+                        <th>S.No</th>
+                        <th>Question</th>
+                        <th>Total Marks</th>
+                    </tr>
+                    {%for i in range(l)%}
+                        <tr>
+                            <td>{{i+1}}</td>
+                            <td>{{dashboard_data[i][0]}}</td>
+                            <td>{{dashboard_data[i][1]}}</td>
+                        </tr>
+                    {%endfor%}
+                </table>
+                
+                <form action="/uploadExamSheet" method="POST" enctype="multipart/form-data">
+                    <div class="file-upload">
+                        <div class="file-select">
+                          <div class="file-select-button" id="fileName">Upload Exam Answer Sheet</div> <br/><br/>
+                          <div class="file-select-name" id="noFile">No file chosen...</div> 
+                          <input type="file" name="chooseFile" id="chooseFile">
+                        </div>
+                    </div> <br/>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+            <br/><br/>
+            <span style="color:green">{{res}}</span>
+            <span style="color:red">{{err}}</span>
+          </div>
+        </div>
+        <script type ="text/javascript">
+            var counter = 1;
+            var limit = 40;
+            function addInput(divName){
+                 if (counter == limit)  {
+                      alert("You have not allowed to create more questions");
+                 }
+                 else {
+                      var newdiv = document.createElement('div');
+                      newdiv.innerHTML = " <br><input type='text' class='form-control' placeholder='Question"+ (counter+1) +"' name='question" + (counter+1) +"_name' required=''>";
+                      document.getElementById(divName).appendChild(newdiv);
+                      var newdiv = document.createElement('div');
+                      newdiv.innerHTML = " <br><input type='text' class='form-control' placeholder='Marks for Question"+ (counter+1) +"' name='marks" + (counter+1) +"_name' required=''>";
+                      document.getElementById(divName).appendChild(newdiv);
+                      counter++;
+                 }
+            }
+            </script>
+    </body>
+</html>
